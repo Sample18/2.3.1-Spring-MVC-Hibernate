@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit employe</title>
+</head>
+<body>
+<div>
+    <form th:method="POST" th:action="@{'edit?id=' + ${emp.getId()}}" th:object="${emp}">
+        <label for="name">Name</label>
+        <input th:field="*{name}" type="text" id="name" th:value="${emp.getName()}"/>
+
+        <br>
+        <label for="surname">Surname</label>
+        <input th:field="*{surname}" type="text" id="surname" th:value="${emp.getSurname()}"/>
+
+        <br><label for="department">Department</label>
+        <input th:field="*{department}" type="text" id="department" th:value="${emp.getDepartment()}"/>
+
+        <br><label for="salary">Salary</label>
+        <input th:field="*{salary}" type="text" id="salary" th:value="${emp.getSalary()}"/>
+
+        <br>
+
+        <input value="Edit employe" type="submit"/>
+    </form>
+</div>
+</body>
+</html>
