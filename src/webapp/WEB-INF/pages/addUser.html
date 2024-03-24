@@ -3,11 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New employe</title>
+    <title>New user</title>
 </head>
 <body>
 <div>
-    <form th:method="POST" th:action="@{/new}" th:object="${emp}">
+    <form th:method="POST" th:action="@{/new}" th:object="${user}">
         <label for="name">Name</label>
         <input th:field="*{name}" type="text" id="name"/>
 
@@ -23,7 +23,7 @@
 
         <br>
 
-        <input value="Add employe" type="submit"/>
+        <input value="Add user" type="submit"/>
     </form>
 </div>
 </body>

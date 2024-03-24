@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employees</title>
+    <title>Users</title>
 </head>
 <body>
 <div>
@@ -19,21 +19,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="emp : ${employeList}">
-            <td th:text="${emp.getId()}">Id</td>
-            <td th:text="${emp.getDepartment()}">Department</td>
-            <td th:text="${emp.getName()}">Name</td>
-            <td th:text="${emp.getSurname()}">Surname</td>
-            <td th:text="${emp.getSalary()}">Salary</td>
+        <tr th:each="user : ${usersList}">
+            <td th:text="${user.getId()}">Id</td>
+            <td th:text="${user.getDepartment()}">Department</td>
+            <td th:text="${user.getName()}">Name</td>
+            <td th:text="${user.getSurname()}">Surname</td>
+            <td th:text="${user.getSalary()}">Salary</td>
             <td>
-                <a th:href="@{'remove?id=' + ${emp.getId()}}">Remove</a>
-                <a th:href="@{'edit?id=' + ${emp.getId()}}">Update</a>
+                <a th:href="@{'remove?id=' + ${user.getId()}}">Remove</a>
+                <a th:href="@{'edit?id=' + ${user.getId()}}">Update</a>
             </td>
         </tr>
         </tbody>
     </table>
     <div>
-        <a th:href="@{/new}">Add new employe</a>
+        <a th:href="@{/new}">Add new user</a>
     </div>
 </div>
 </body>

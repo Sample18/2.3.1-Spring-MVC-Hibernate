@@ -6,71 +6,71 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.model.Employe;
-import web.service.EmployeService;
+import web.model.User;
+import web.service.UserService;
 
 @Controller
 public class MainController {
 
-    private final EmployeService employeService;
+    private final UserService userService;
 
     @Autowired
-    public MainController(EmployeService employeService) {
-        this.employeService = employeService;
+    public MainController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping(value = "/")
-    public String printWelcome(Model model) {
-        model.addAttribute("employeList", employeService.getAllEmploye());
+    public String startIndex(Model model) {
+        model.addAttribute("usersList", userService.getAllUsers());
 
         return "index";
     }
 
     @GetMapping(value = "remove")
-    public String removeEmp(@RequestParam Integer id) {
-        employeService.remove(id);
+    public String removeUser(@RequestParam Integer id) {
+        userService.remove(id);
         return "redirect:/";
     }
 
     @GetMapping(value = "edit")
-    public String editEmp(@RequestParam Integer id, Model model) {
-        model.addAttribute("emp", employeService.findById(id));
-        return "editEmploye";
+    public String editUser(@RequestParam Integer id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+        return "editUser";
     }
 
     @PostMapping(value = "edit")
-    public String updateEmp(@RequestParam("id") Integer id,
+    public String updateUser(@RequestParam("id") Integer id,
                             @RequestParam("name") String name,
                             @RequestParam("surname") String surname,
                             @RequestParam("department") String department,
                             @RequestParam("salary") Integer salary) {
-        Employe employe = new Employe();
-        employe.setId(id);
-        employe.setName(name);
-        employe.setSurname(surname);
-        employe.setDepartment(department);
-        employe.setSalary(salary);
-        employeService.update(employe);
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setSurname(surname);
+        user.setDepartment(department);
+        user.setSalary(salary);
+        userService.update(user);
         return "redirect:/";
     }
 
     @GetMapping(value = "new")
-    public String newEmp(Model model) {
-        model.addAttribute("emp", new Employe());
-        return "addEmploye";
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        return "addUser";
     }
 
     @PostMapping(value = "new")
-    public String createEmp(@RequestParam("name") String name,
+    public String createUser(@RequestParam("name") String name,
                             @RequestParam("surname") String surname,
                             @RequestParam("department") String department,
                             @RequestParam("salary") Integer salary) {
-        Employe employe = new Employe();
-        employe.setName(name);
-        employe.setSurname(surname);
-        employe.setDepartment(department);
-        employe.setSalary(salary);
-        employeService.create(employe);
+        User user = new User();
+        user.setName(name);
+        user.setSurname(surname);
+        user.setDepartment(department);
+        user.setSalary(salary);
+        userService.create(user);
         return "redirect:/";
     }
 

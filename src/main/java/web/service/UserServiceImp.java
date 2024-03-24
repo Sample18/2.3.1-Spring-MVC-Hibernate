@@ -3,44 +3,44 @@ package web.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.dao.EmployeDAO;
-import web.model.Employe;
+import web.dao.UserDAO;
+import web.model.User;
 
 import java.util.List;
 
 @Service
-public class EmployeServiceImp implements EmployeService {
+public class UserServiceImp implements UserService {
 
     @Autowired
-    private EmployeDAO employeDAO;
+    private UserDAO userDAO;
 
     @Transactional(readOnly = true)
     @Override
-    public List<Employe> getAllEmploye() {
-        return employeDAO.getAllEmploye();
+    public List<User> getAllUsers() {
+        return userDAO.getAllUsers();
     }
 
     @Transactional
     @Override
     public void remove(int id) {
-        employeDAO.remove(id);
+        userDAO.remove(id);
     }
 
     @Transactional
     @Override
-    public void create(Employe employe) {
-        employeDAO.create(employe);
+    public void create(User user) {
+        userDAO.create(user);
     }
 
     @Transactional
     @Override
-    public void update(Employe employe) {
-        employeDAO.update(employe);
+    public void update(User user) {
+        userDAO.update(user);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Employe findById(int id) {
-        return employeDAO.findById(id);
+    public User findById(int id) {
+        return userDAO.findById(id);
     }
 }

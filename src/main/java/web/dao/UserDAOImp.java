@@ -2,25 +2,25 @@ package web.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import web.model.Employe;
+import web.model.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class EmployeDAOImp implements EmployeDAO {
+public class UserDAOImp implements UserDAO {
 
     private final EntityManager entityManager;
 
     @Autowired
-    public EmployeDAOImp(EntityManager entityManager) {
+    public UserDAOImp(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    public List<Employe> getAllEmploye() {
+    public List<User> getAllUsers() {
         try {
-            return entityManager.createQuery("from Employe", Employe.class).getResultList();
+            return entityManager.createQuery("from User", User.class).getResultList();
         } catch (RuntimeException e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
@@ -33,9 +33,9 @@ public class EmployeDAOImp implements EmployeDAO {
     public void remove(int id) {
         try {
             entityManager.getTransaction().begin();
-            Employe employe = entityManager.find(Employe.class, id);
-            if (employe != null) {
-                entityManager.remove(employe);
+            User user = entityManager.find(User.class, id);
+            if (user != null) {
+                entityManager.remove(user);
             }
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
@@ -47,10 +47,10 @@ public class EmployeDAOImp implements EmployeDAO {
     }
 
     @Override
-    public void create(Employe employe) {
+    public void create(User user) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(employe);
+            entityManager.persist(user);
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
             if (entityManager.getTransaction().isActive()) {
@@ -61,10 +61,10 @@ public class EmployeDAOImp implements EmployeDAO {
     }
 
     @Override
-    public void update(Employe employe) {
+    public void update(User user) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(employe);
+            entityManager.merge(user);
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
             if (entityManager.getTransaction().isActive()) {
@@ -75,13 +75,13 @@ public class EmployeDAOImp implements EmployeDAO {
     }
 
     @Override
-    public Employe findById(int id) {
+    public User findById(int id) {
         try {
-            Employe employe;
+            User user;
             entityManager.getTransaction().begin();
-            employe = entityManager.find(Employe.class, id);
+            user = entityManager.find(User.class, id);
             entityManager.getTransaction().commit();
-            return employe;
+            return user;
         } catch (RuntimeException e) {
             if (entityManager.getTransaction().isActive()) {
                 entityManager.getTransaction().rollback();
