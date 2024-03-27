@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.User;
@@ -22,7 +23,6 @@ public class MainController {
     @GetMapping(value = "/")
     public String startIndex(Model model) {
         model.addAttribute("usersList", userService.getAllUsers());
-
         return "index";
     }
 
@@ -39,17 +39,7 @@ public class MainController {
     }
 
     @PostMapping(value = "edit")
-    public String updateUser(@RequestParam("id") Integer id,
-                            @RequestParam("name") String name,
-                            @RequestParam("surname") String surname,
-                            @RequestParam("department") String department,
-                            @RequestParam("salary") Integer salary) {
-        User user = new User();
-        user.setId(id);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setDepartment(department);
-        user.setSalary(salary);
+    public String updateUser(@ModelAttribute("user") User user) {
         userService.update(user);
         return "redirect:/";
     }
@@ -61,15 +51,7 @@ public class MainController {
     }
 
     @PostMapping(value = "new")
-    public String createUser(@RequestParam("name") String name,
-                            @RequestParam("surname") String surname,
-                            @RequestParam("department") String department,
-                            @RequestParam("salary") Integer salary) {
-        User user = new User();
-        user.setName(name);
-        user.setSurname(surname);
-        user.setDepartment(department);
-        user.setSalary(salary);
+    public String createUser(@ModelAttribute("user") User user) {
         userService.create(user);
         return "redirect:/";
     }
